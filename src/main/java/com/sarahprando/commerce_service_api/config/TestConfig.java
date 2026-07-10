@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.sarahprando.commerce_service_api.entities.Category;
 import com.sarahprando.commerce_service_api.entities.Order;
 import com.sarahprando.commerce_service_api.entities.OrderItem;
+import com.sarahprando.commerce_service_api.entities.Payment;
 import com.sarahprando.commerce_service_api.entities.Product;
 import com.sarahprando.commerce_service_api.entities.User;
 import com.sarahprando.commerce_service_api.entities.enums.OrderStatus;
@@ -78,6 +79,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-07-22T16:21:22Z"), o3);
+		o3.setPayment(pay1);
+		
+		orderRepository.save(o3);
 	}
 
 }
